@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
+
+.Font-Text{
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: #000;
+}
+
+.Text-Style {
+  word-spacing: 20%;
+}

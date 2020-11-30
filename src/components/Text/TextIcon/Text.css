@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300&display=swap');
+
+
+.Text-Icon{
+  display: flex;
+  flex-direction: row;
+}
+.Font-Title{
+  font-family: 'Sansita Swashed', cursive;
+  font-size: 35px;
+  padding: 10px;
+}
+
+.Globe-Icon{
+  margin: auto;
+  font-size: medium;
+}

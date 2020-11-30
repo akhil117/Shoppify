@@ -1,0 +1,11 @@
+.link {
+  margin-top: 1%;
+  transition: 0.3s;
+}
+.link a:hover{
+  font-size: 15px;
+}
+
+.link a:visited{
+  color: #665ed0;
+}
