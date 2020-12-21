@@ -6,7 +6,6 @@ import './InputField.css'
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    width: '50%',
     margin: '1%'
   },
   textField: {
@@ -39,28 +38,29 @@ const useStyles = makeStyles(theme => ({
 
 const InputField = (props) => {
   const {
-    hintText, clicked, property, rid, value,isPassword
+    hintText, clicked, property, reference, value, isPassword,
   } = props;
   const classes = useStyles();
 
   return (
-      <TextField
-        defaultValue={value}
-        id="outlined-required"
-        className={classes.root}
-        InputLabelProps={{
-          classes: {
-            root: classes.cssLabel,
-            focused: classes.cssFocused,
-            asterisk: classes.labelAsterisk,
-          },
-          shrink: true,
-        }}
-        placeholder={hintText}
-        required
-        type={isPassword}
-        variant="outlined"
-      />
+    <TextField
+      defaultValue={value}
+      id="outlined-required"
+      className={classes.root}
+      InputLabelProps={{
+        classes: {
+          root: classes.cssLabel,
+          focused: classes.cssFocused,
+          asterisk: classes.labelAsterisk,
+        },
+        shrink: true,
+      }}
+      inputRef={reference}
+      placeholder={hintText}
+      required
+      type={isPassword}
+      variant="outlined"
+    />
   );
 };
 

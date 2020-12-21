@@ -1,0 +1,59 @@
+.main-navigation{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 3.5rem;
+  background: #0080ff;
+  display: flex;
+  flex-direction: row;
+  padding: 0 1rem;
+  align-items: center;
+}
+
+
+/* logo */
+
+
+
+.main-navigation__logo>h1{
+  color: #fff;
+  font-family: sans-serif;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* menu items */
+
+.main-navigation__items{
+  margin-left: 1.5rem;
+}
+
+.main-navigation__items>ul{
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.main-navigation__items>ul>li{
+  margin: 0 1rem;
+  padding: 0;
+}
+
+.main-navigation__items>ul>li>a{
+  text-decoration: none;
+  color: #fff;
+}
+
+/* 1st when you placed mouse shows color 
+2nd when you clicked mouse it shows color
+3rd when you clicked and your are in particular page it should show color  */
+
+.main-navigation__items>ul>li>a:hover,
+.main-navigation__items>ul>li>a:active,
+.main-navigation__items>ul>li>a.active
+{
+  color: #f7f45f;
+}

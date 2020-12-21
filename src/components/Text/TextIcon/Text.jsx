@@ -9,7 +9,7 @@ const ShoppifyText = (props) => {
     return (
       <div className='Text-Icon'>
         <label className='Font-Title'>{props.Title}</label>
-        <FcGlobe className="Globe-Icon" size={42} />
+        <FcGlobe className="Globe-Icon" size={30}/>
       </div>
     );
 };
