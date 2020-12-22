@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios'
 import Input from '../../components/Input';
 import Text from '../../components/Text/TextIcon';
 import DimText from '../../components/Text/DimText';

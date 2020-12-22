@@ -2,11 +2,19 @@ import './App.css';
 import Login from './containers/Login'
 import Booking from "./containers/Bookings";
 import Event from './containers/Events'
-import React from 'react';
-import MainNavigation from './components/Nav'
+import React, { useEffect } from 'react';
+import MainNavigation from './components/Nav';
+import { useSelector,useDispatch} from "react-redux";
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import * as actions from "./store/actions/index";
 
-function App() {
+const App = () => {
+  const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  console.log("MY GLOBAL STATE",auth.token);
+  useEffect(()=>{
+      dispatch(actions.authCheckState())
+  },[])
   return (
     <div className="App">
       <BrowserRouter>
@@ -14,10 +22,14 @@ function App() {
           <MainNavigation />
           <main className="main-content">
             <Switch>
-              <Redirect from="/" to="/auth" exact />
-              <Route exact path="/auth" component={Login} />
+              {!auth.token && <Redirect from="/" to="/auth" exact />}
+              {auth.token && <Redirect from="/" to="/events" exact />}
+              {auth.token && <Redirect from="/auth" to="/events" exact />}
+              {!auth.token &&
+                <Route exact path="/auth" component={Login} />
+              }
               <Route path="/events" component={Event} />
-              <Route path="/bookings" component={Booking} />
+              {auth.token && <Route path="/bookings" component={Booking} />}
             </Switch>
           </main>
         </React.Fragment>
