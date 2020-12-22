@@ -25,34 +25,6 @@ class Login extends React.Component {
     if (email.trim().length === 0 || password.trim().length === 0) {
       return;
     }
-    // let requestBody = {
-    //   query: `mutation {
-    //     createUser(user: {email: "${email}", password: "${password}"}) {
-    //       email
-    //     }
-    //   }
-    //   `
-    // };
-    // if (!this.props.isLogin) {
-    //   requestBody = {
-    //     query: `query{
-    //       login(email:"${email}",password: "${password}"){
-    //         userId,
-    //         token,
-    //         tokenExpiration
-    //       }
-    //     }`
-    //   }
-    // }
-
-    // const res = await axios.post('http://localhost:3200/graphql', {
-    //   ...requestBody
-    // }, {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   }
-    // });
-    // console.log('Result', res);
     this.props.onAuth(email, password, this.props.isLogin);
   }
 
