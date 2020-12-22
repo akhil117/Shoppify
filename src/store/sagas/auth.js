@@ -34,9 +34,41 @@ export function* authUserSaga(action) {
         'Accept': 'application/json'
       }
     });
+    const expirationDate = yield new Date(
+      new Date().getTime() + 3600 * 1000 
+    );
     console.log("Result", res);
-    yield put(actions.authSuccess(res.data.data.login.token, res.data.data.login.userId));
+    yield localStorage.setItem("token", res.data.data.login.token);
+    yield localStorage.setItem("expirationDate", expirationDate);
+    yield localStorage.setItem("userId", res.data.data.login.userId);
+    yield put(actions.authSuccess(res.data.data.login.token, res.data.data.login.userId,res.data.data.login.tokenExpiration));
   } catch (err) {
 
   }
+}
+
+
+export function* authCheckStateSaga(){
+  const token = yield localStorage.getItem("token");
+  if(!token){
+    yield put(actions.logout());
+  }else{
+    const userId = yield localStorage.getItem("userId");
+    const expirationDate = yield new Date(
+      localStorage.getItem("expirationDate")
+    );
+    if (expirationDate <= new Date()) {
+      yield put(actions.logout());
+    }
+    else{
+    yield put(actions.authSuccess(token,userId,expirationDate));
+    }
+  }
+}
+
+export function* logoutSaga(){
+  yield call([localStorage, "removeItem"], "token");
+  yield call([localStorage, "removeItem"], "expirationDate");
+  yield call([localStorage, "removeItem"], "userId");
+  yield put(actions.logoutSucceed());
 }

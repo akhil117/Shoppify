@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 
 const InputField = (props) => {
   const {
-    hintText, clicked, property, reference, value, isPassword,
+    hintText,reference, value, isPassword,
   } = props;
   const classes = useStyles();
 

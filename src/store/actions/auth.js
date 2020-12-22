@@ -12,11 +12,30 @@ export const auth = (email, password, isLogin) => {
 };
 
 
-export const authSuccess = (token, userId) => {
-  console.log("Entered auth success");
+export const authSuccess = (token, userId,tokenExpiration) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    token: token,
-    userId: userId
+    token,
+    userId,
+    tokenExpiration
   }
+}
+
+export const authCheckState=() => {
+  return {
+    type: 'AUTH_CHECK_STATE'
+  }
+}
+
+export const logout = () => {
+
+  return {
+    type: actionTypes.AUTH_INITIATE_LOGOUT
+  };
+};
+
+export const logoutSucceed = () => {
+  return {
+    type: actionTypes.AUTH_LOGOUT
+  };
 }
