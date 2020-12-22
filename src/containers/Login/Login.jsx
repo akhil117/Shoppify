@@ -8,7 +8,7 @@ import SubmitButton from '../../components/Button/Submit';
 import LinkText from '../../components/Links';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions/actionTypes'
-
+import * as actions from '../../store/actions/auth';
 class Login extends React.Component {
 
   constructor(props) {
@@ -25,34 +25,35 @@ class Login extends React.Component {
     if (email.trim().length === 0 || password.trim().length === 0) {
       return;
     }
-    let requestBody = {
-      query: `mutation {
-        createUser(user: {email: "${email}", password: "${password}"}) {
-          email
-        }
-      }
-      `
-    };
-    if (!this.state.isLogin) {
-      requestBody = {
-        query: `query{
-          login(email:"${email}",password: "${password}"){
-            userId,
-            token,
-            tokenExpiration
-          }
-        }`
-      }
-    }
+    // let requestBody = {
+    //   query: `mutation {
+    //     createUser(user: {email: "${email}", password: "${password}"}) {
+    //       email
+    //     }
+    //   }
+    //   `
+    // };
+    // if (!this.props.isLogin) {
+    //   requestBody = {
+    //     query: `query{
+    //       login(email:"${email}",password: "${password}"){
+    //         userId,
+    //         token,
+    //         tokenExpiration
+    //       }
+    //     }`
+    //   }
+    // }
 
-    const res = await axios.post('http://localhost:3200/graphql', {
-      ...requestBody
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    });
-    console.log('Result', res);
+    // const res = await axios.post('http://localhost:3200/graphql', {
+    //   ...requestBody
+    // }, {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   }
+    // });
+    // console.log('Result', res);
+    this.props.onAuth(email, password, this.props.isLogin);
   }
 
   render() {
@@ -81,7 +82,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    toggleLogin: () => dispatch({ type: actionTypes.IS_LOGIN })
+    toggleLogin: () => dispatch({ type: actionTypes.IS_LOGIN }),
+    onAuth: (email, password, isLogin) => dispatch(actions.auth(email, password, isLogin))
   }
 }
 
