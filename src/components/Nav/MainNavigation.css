@@ -4,9 +4,11 @@
   top: 0;
   left: 0;
   height: 3.5rem;
-  background: #0080ff;
+  background: #0a66c2de;
+  font-family: sans-serif;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   padding: 0 1rem;
   align-items: center;
 }
@@ -27,6 +29,7 @@
 
 .main-navigation__items{
   margin-left: 1.5rem;
+  margin-right: 0.5rem;
 }
 
 .main-navigation__items>ul{
@@ -35,16 +38,25 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  align-items: center;
 }
 
-.main-navigation__items>ul>li{
+.main-navigation__items li{
   margin: 0 1rem;
-  padding: 0;
 }
 
-.main-navigation__items>ul>li>a{
+.main-navigation__items>ul>li>a,
+.main-navigation__items>ul>li>button
+{
   text-decoration: none;
-  color: #fff;
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  margin: 0;
+  outline: none;
+  color: white;
 }
 
 /* 1st when you placed mouse shows color 
@@ -53,7 +65,22 @@
 
 .main-navigation__items>ul>li>a:hover,
 .main-navigation__items>ul>li>a:active,
-.main-navigation__items>ul>li>a.active
+.main-navigation__items>ul>li>a.active,
+.main-navigation__items>ul>li>button:hover,
+.main-navigation__items>ul>li>button:active
 {
-  color: #f7f45f;
+  color: #0a66c2;
+  background: #ffffff;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+}
+
+
+
+/* media queries */
+@media screen and (max-width: 450px){
+  .main-navigation__items li{
+    margin: 0 0;
+  }
 }

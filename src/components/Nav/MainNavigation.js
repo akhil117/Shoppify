@@ -1,10 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import './MainNavigation.css';
+import * as actions from '../../store/actions/index'
+
 
 const MainNavigation = props => {
   const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
 
   return (
     <header className="main-navigation">
@@ -23,9 +26,17 @@ const MainNavigation = props => {
           </li>
           {
             auth.token &&
-            <li>
-              <NavLink to="/bookings">Bookings</NavLink>
-            </li>
+            (
+              <React.Fragment>
+                <li>
+                  <NavLink to="/bookings">Bookings</NavLink>
+                </li>
+
+                <li>
+                  <button onClick={() => dispatch(actions.logout())}>Logout</button>
+                </li>
+              </React.Fragment>
+            )
           }
         </ul>
       </nav>
