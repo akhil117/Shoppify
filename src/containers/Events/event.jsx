@@ -2,7 +2,9 @@ import './event.css';
 import React from 'react';
 import SubmitButton from '../../components/Button/Submit';
 import Modal from '../../components/Modal';
-
+import axios from "axios";
+import { connect } from 'react-redux';
+import * as action from '../../store/actions'
 
 class Event extends React.Component {
   constructor(props) {
@@ -26,12 +28,12 @@ class Event extends React.Component {
     })
   }
 
-  saveEvent = () => {
-    const title = this.titleRef.current.value;
-    const priceRef = this.priceRef.current.value;
+  saveEvent = async () => {
+    const titleRef = this.titleRef.current.value;
+    const priceRef = +this.priceRef.current.value;
     const descriptionRef = this.descriptionRef.current.value;
-    const dateTimeRef = this.dateTimeRef.current.value;
-
+    const dateTimeRef = new Date(this.dateTimeRef.current.value).toISOString();
+    this.props.createEvent(titleRef,priceRef,dateTimeRef,descriptionRef);
   }
 
   backdropToggle = () => {
@@ -41,6 +43,10 @@ class Event extends React.Component {
         open: !prevState.open
       }
     })
+  }
+
+  componentDidMount = () => {
+    this.props.fetchEvents();
   }
 
   render() {
@@ -65,4 +71,17 @@ class Event extends React.Component {
   };
 };
 
-export default Event;
+const mapStateToProps = (state) => {
+  return {
+    token: state.auth.token
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createEvent: (title,price,datetime,descripiton) => dispatch(action.event(title,price,datetime,descripiton)),
+    fetchEvents: () => dispatch(action.fetchEvents())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Event);
