@@ -21,17 +21,18 @@ const App = () => {
         <React.Fragment>
           <MainNavigation />
           <main className="main-content">
-            {!auth.token && <Redirect to="/auth" exact />}
-            {auth.token && <Redirect from="/" to="/events" exact />}
-            {auth.token && <Redirect from="/auth" to="/events" exact />}
+
             <Switch>
+              {auth.token && <Redirect from="/" to="/events" exact />}
+              {auth.token && <Redirect from="/auth" to="/events" exact />}
               {!auth.token &&
                 <Route exact path="/auth" component={Login} />
               }
               <Route path="/events" component={Event} />
               {auth.token && <Route path="/bookings" component={Booking} />}
-
+              {!auth.token && <Redirect from="/" to="/auth" exact />}
             </Switch>
+
           </main>
         </React.Fragment>
       </BrowserRouter>

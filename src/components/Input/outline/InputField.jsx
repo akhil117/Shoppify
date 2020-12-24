@@ -9,12 +9,11 @@ const useStyles = makeStyles(theme => ({
     margin: '1%'
   },
   textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
+    height: 10
   },
   cssLabel: {
     color: '#000080',
-    fontSize: 20,
+    fontSize: 18,
   },
 
   cssOutlinedInput: {
@@ -27,18 +26,15 @@ const useStyles = makeStyles(theme => ({
       borderColor: 'green !important',
     },
   },
-  labelAsterisk: {
-    color: 'red',
-  },
   notchedOutline: {
-    borderWidth: '3px',
+    borderWidth: '2px',
     borderRadius: '20px',
   },
 }));
 
 const InputField = (props) => {
   const {
-    hintText,reference, value, isPassword,
+    hintText, reference, value, isPassword,
   } = props;
   const classes = useStyles();
 
@@ -50,10 +46,13 @@ const InputField = (props) => {
       InputLabelProps={{
         classes: {
           root: classes.cssLabel,
-          focused: classes.cssFocused,
-          asterisk: classes.labelAsterisk,
         },
         shrink: true,
+      }}
+      InputProps={{
+        classes: {
+          input: classes.textField
+        }
       }}
       inputRef={reference}
       placeholder={hintText}
