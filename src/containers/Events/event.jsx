@@ -10,11 +10,11 @@ class Event extends React.Component {
     this.state = {
       isEvent: false,
       open: false
-    },
-      this.titleRef = React.createRef(),
-      this.priceRef = React.createRef(),
-      this.descriptionRef = React.createRef(),
-      this.dateTimeRef = React.createRef();
+    };
+    this.titleRef = React.createRef();
+    this.priceRef = React.createRef();
+    this.descriptionRef = React.createRef();
+    this.dateTimeRef = React.createRef();
   }
 
   isEventHandler = () => {
