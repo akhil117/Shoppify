@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from '../../components/Input';
+import Input from '../../components/Input/outline';
 import Text from '../../components/Text/TextIcon';
 import DimText from '../../components/Text/DimText';
 import './Login.css'
@@ -38,7 +38,7 @@ class Login extends React.Component {
           <Input reference={this.email} hintText="Enter Email" isPassword="text" />
           <Input reference={this.password} hintText="Enter Password" isPassword="password" />
         </div>
-        <SubmitButton submitHandler={this.submitHandler} Title={buttonTitle} />
+        <SubmitButton backgroundColor="#0A66C2" font="14px" width='35%' padding='8px' submitHandler={this.submitHandler} Title={buttonTitle} />
         <LinkText toggleLogin={this.props.toggleLogin}>{isLogin ? "Already on Shoppify?" : "New to Shoppify?"}</LinkText>
       </form>
     );
