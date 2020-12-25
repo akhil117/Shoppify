@@ -5,6 +5,7 @@ import Modal from '../../components/Modal';
 import Alert from '../../components/Alert';
 import Spinner from '../../components/Spinner'
 import { connect } from 'react-redux';
+import Items from '../../components/Events/Items';
 import * as action from '../../store/actions'
 
 class Event extends React.Component {
@@ -44,9 +45,16 @@ class Event extends React.Component {
     });
 
     this.props.createEvent(titleRef, priceRef, dateTimeRef, descriptionRef);
-    setTimeout(() => {
 
-    }, 10000);
+    this.clearRefs()
+  }
+
+  clearRefs = () => {
+    this.titleRef.current.value = "";
+    this.priceRef.current.value= "";
+    this.descriptionRef.current.value= "";
+    this.dateTimeRef.current.value="";
+
   }
 
   backdropToggle = () => {
@@ -65,7 +73,7 @@ class Event extends React.Component {
 
   render() {
     const { isEvent } = this.state;
-    const { isEventAlert, closeEventAlert, isSpinnerDisplay } = this.props
+    const { isEventAlert, closeEventAlert, isSpinnerDisplay, events } = this.props
     return (
       <React.Fragment>
         <div className='events-controls'>
@@ -80,6 +88,7 @@ class Event extends React.Component {
           saveEvent={this.saveEvent}
           descriptionRef={this.descriptionRef}
         />
+        <Items events = {events} />
         { isSpinnerDisplay &&
           <div className="spinner_display">
             <Spinner />
@@ -99,7 +108,8 @@ const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
     isEventAlert: state.event.isShowAlert,
-    isSpinnerDisplay: state.event.isShowSpinner
+    isSpinnerDisplay: state.event.isShowSpinner,
+    events: state.event.events
   }
 }
 

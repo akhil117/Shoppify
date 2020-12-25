@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
+
 .main-navigation{
   position: fixed;
   width: 100%;
@@ -17,7 +19,8 @@
 /* logo */
 .main-navigation__logo>h1{
   color: #fff;
-  font-family: sans-serif;
+  font-family: 'Open Sans';
+  font-weight: 400;
   margin: 0;
   font-size: 1.5rem;
 }
