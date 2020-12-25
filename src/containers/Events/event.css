@@ -4,3 +4,17 @@
   justify-content: flex-end;
 }
 
+.alert__display{
+  width: 100%;
+  position: fixed;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  bottom: 2vh;
+}
+
+.spinner_display{
+  position: fixed;
+  width: 100%;
+}
+
