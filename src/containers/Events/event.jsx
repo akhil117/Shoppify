@@ -54,7 +54,6 @@ class Event extends React.Component {
     this.priceRef.current.value= "";
     this.descriptionRef.current.value= "";
     this.dateTimeRef.current.value="";
-
   }
 
   backdropToggle = () => {
