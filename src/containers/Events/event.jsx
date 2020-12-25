@@ -2,7 +2,8 @@ import './event.css';
 import React from 'react';
 import SubmitButton from '../../components/Button/Submit';
 import Modal from '../../components/Modal';
-import axios from "axios";
+import Alert from '../../components/Alert';
+import Spinner from '../../components/Spinner'
 import { connect } from 'react-redux';
 import * as action from '../../store/actions'
 
@@ -33,7 +34,19 @@ class Event extends React.Component {
     const priceRef = +this.priceRef.current.value;
     const descriptionRef = this.descriptionRef.current.value;
     const dateTimeRef = new Date(this.dateTimeRef.current.value).toISOString();
-    this.props.createEvent(titleRef,priceRef,dateTimeRef,descriptionRef);
+
+    //closing the dialog box
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        isEvent: !prevState.isEvent
+      }
+    });
+
+    this.props.createEvent(titleRef, priceRef, dateTimeRef, descriptionRef);
+    setTimeout(() => {
+
+    }, 10000);
   }
 
   backdropToggle = () => {
@@ -46,12 +59,13 @@ class Event extends React.Component {
   }
 
   componentDidMount = () => {
+    this.props.toggleSpinner()
     this.props.fetchEvents();
   }
 
   render() {
     const { isEvent } = this.state;
-
+    const { isEventAlert, closeEventAlert, isSpinnerDisplay } = this.props
     return (
       <React.Fragment>
         <div className='events-controls'>
@@ -66,6 +80,16 @@ class Event extends React.Component {
           saveEvent={this.saveEvent}
           descriptionRef={this.descriptionRef}
         />
+        { isSpinnerDisplay &&
+          <div className="spinner_display">
+            <Spinner />
+          </div>
+        }
+        { isEventAlert &&
+          <div className="alert__display">
+            <Alert closeHandler={closeEventAlert} width={'50%'} title={"Successfully Created the Event"} />
+          </div>
+        }
       </React.Fragment>
     )
   };
@@ -73,14 +97,18 @@ class Event extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    token: state.auth.token
+    token: state.auth.token,
+    isEventAlert: state.event.isShowAlert,
+    isSpinnerDisplay: state.event.isShowSpinner
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createEvent: (title,price,datetime,descripiton) => dispatch(action.event(title,price,datetime,descripiton)),
-    fetchEvents: () => dispatch(action.fetchEvents())
+    createEvent: (title, price, datetime, descripiton) => dispatch(action.event(title, price, datetime, descripiton)),
+    fetchEvents: () => dispatch(action.fetchEvents()),
+    closeEventAlert: () => dispatch(action.closeEventAlert()),
+    toggleSpinner: () => dispatch(action.isShowSpinner())
   }
 }
 

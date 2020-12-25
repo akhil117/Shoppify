@@ -7,7 +7,9 @@ const initialState = {
     lastCreatedPrice: null,
     lastCreatedDescription: null
   },
-  events: []
+  events: [],
+  isShowAlert: false,
+  isShowSpinner: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -20,9 +22,12 @@ const reducer = (state = initialState, action) => {
         lastCreatedDatetime: action.datetime,
         lastCreatedPrice: action.price,
         lastCreatedDescription: action.description
-      }
+      },
+      isShowAlert: true
     }
-    case actions.EVENTS_SUCCESS: return{ ...state, events:action.events }
+    case actions.EVENTS_SUCCESS: return{ ...state, events:action.events, isShowSpinner:false }
+    case actions.SPINNER_TOGGLE: return{...state,isShowSpinner:!state.isShowSpinner}
+    case actions.CLOSE_ALERT_EVENT: return{...state, isShowAlert: false }
     default:
       return state;
   }
