@@ -8,6 +8,8 @@ import SubmitButton from "../../../Button/Submit"
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
+import * as action from '../../../../store/actions/index'
+import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,46 +31,64 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Items = (props) => {
+const Item = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const {date,price,description,title} = props;
+  const { date, price, description, title, createdEventUserId, eventId, isBooking } = props;
+  console.log("Dateeee", date);
+  const { userId, token } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
   return (
-
-      <Card variant="outlined" className="card__event">
-        <header className="card__header">
-          <h1> {title} </h1>
-        </header>
-        <p>
-          {description}
-        </p>
-        <div className="card__price__more">
-          <p><span>$</span>{price}</p>
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded,
-            })}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </div>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            Created Date: {new Date(date).toLocaleDateString()}
-          </CardContent>
+    <Card variant="outlined" className="card__event">
+      <header className="card__header">
+        <h1> {title} </h1>
+      </header>
+      <p>
+        {description}
+      </p>
+      <div className="card__price__more">
+        <p><span>$</span>{price}</p>
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded,
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+      </div>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          Created Date: {new Date(date).toLocaleDateString()}
+        </CardContent>
+        {(token && !isBooking) &&
           <div className="card__actions">
-            <SubmitButton backgroundColor="#f50057" font="10px" width='18%' padding='8px' submitHandler={handleExpandClick} Title="Cancel" />
-            <SubmitButton backgroundColor="#0A66C2" font="10px" width='18%' padding='8px' submitHandler={null} Title="Book" />
+            {createdEventUserId === userId ? <React.Fragment>
+              <SubmitButton backgroundColor="#0A66C2" font="10px" width='56%' padding='8px' submitHandler={null} Title="Your are the Owner of this Event" />
+            </React.Fragment> :
+              <React.Fragment>
+                <SubmitButton backgroundColor="#f50057" font="10px" width='18%' padding='8px' submitHandler={handleExpandClick} Title="Cancel" />
+                <SubmitButton backgroundColor="#0A66C2" font="10px" width='18%' padding='8px' submitHandler={() => dispatch(action.bookEvent(eventId))} Title="Book" />
+              </React.Fragment>
+            }
           </div>
-        </Collapse>
-      </Card>
+        }
+        {
+          (token && isBooking) &&
+          <div className="card__actions">
+            <React.Fragment>
+              <SubmitButton backgroundColor="#f50057" font="10px" width='18%' padding='8px' submitHandler={() => dispatch(action.DeleteBooking(eventId))} Title="Cancel" />
+            </React.Fragment>
+          </div>
+        }
+      </Collapse>
+    </Card>
 
   );
 };
-export default Items;
+export default Item;
