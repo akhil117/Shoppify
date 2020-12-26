@@ -1,5 +1,8 @@
 import './booking.css';
 import React from 'react';
+import * as action from '../../store/actions/index'
+import {connect} from 'react-redux'
+import Items from '../../components/Events/Items';
 
 
 class Booking extends React.Component {
@@ -7,11 +10,28 @@ class Booking extends React.Component {
     super(props);
   }
 
+  componentDidMount = () => {
+    this.props.fetchBookings();
+  }
+
   render(){
     return(
-      <h1>Welcome to bookings page</h1>
+      <Items events={this.props.bookings} isBooking={true} />
     )
   };
 };
 
-export default Booking;
+const mapStateToProps = (state) => {
+  return {
+    token: state.auth.token,
+    bookings: state.booking.bookings
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchBookings: () => dispatch(action.fetchBooking())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Booking);

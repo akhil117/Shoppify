@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
 const Item = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const { date, price, description, title, createdEventUserId, eventId } = props;
+  const { date, price, description, title, createdEventUserId, eventId, isBooking } = props;
+  console.log("Dateeee", date);
   const { userId, token } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const handleExpandClick = () => {
@@ -65,16 +66,24 @@ const Item = (props) => {
         <CardContent>
           Created Date: {new Date(date).toLocaleDateString()}
         </CardContent>
-        {token &&
+        {(token && !isBooking) &&
           <div className="card__actions">
             {createdEventUserId === userId ? <React.Fragment>
               <SubmitButton backgroundColor="#0A66C2" font="10px" width='56%' padding='8px' submitHandler={null} Title="Your are the Owner of this Event" />
             </React.Fragment> :
               <React.Fragment>
                 <SubmitButton backgroundColor="#f50057" font="10px" width='18%' padding='8px' submitHandler={handleExpandClick} Title="Cancel" />
-                <SubmitButton backgroundColor="#0A66C2" font="10px" width='18%' padding='8px' submitHandler={()=>dispatch(action.bookEvent(eventId))} Title="Book" />
+                <SubmitButton backgroundColor="#0A66C2" font="10px" width='18%' padding='8px' submitHandler={() => dispatch(action.bookEvent(eventId))} Title="Book" />
               </React.Fragment>
             }
+          </div>
+        }
+        {
+          (token && isBooking) &&
+          <div className="card__actions">
+            <React.Fragment>
+              <SubmitButton backgroundColor="#f50057" font="10px" width='18%' padding='8px' submitHandler={handleExpandClick} Title="Cancel" />
+            </React.Fragment>
           </div>
         }
       </Collapse>

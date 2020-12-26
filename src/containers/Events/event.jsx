@@ -95,7 +95,7 @@ class Event extends React.Component {
           saveEvent={this.saveEvent}
           descriptionRef={this.descriptionRef}
         />
-        <Items events={events} />
+        <Items events={events} isBooking = {false} />
         { isSpinnerDisplay &&
           <div className="spinner_display">
             <Spinner />
