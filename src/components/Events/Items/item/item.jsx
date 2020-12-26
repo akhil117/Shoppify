@@ -82,7 +82,7 @@ const Item = (props) => {
           (token && isBooking) &&
           <div className="card__actions">
             <React.Fragment>
-              <SubmitButton backgroundColor="#f50057" font="10px" width='18%' padding='8px' submitHandler={handleExpandClick} Title="Cancel" />
+              <SubmitButton backgroundColor="#f50057" font="10px" width='18%' padding='8px' submitHandler={() => dispatch(action.DeleteBooking(eventId))} Title="Cancel" />
             </React.Fragment>
           </div>
         }

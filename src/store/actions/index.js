@@ -18,5 +18,7 @@ export {
 
 export {
   fetchBooking,
-  fetchBookingSuccess
+  fetchBookingSuccess,
+  DeleteBookingSuccess,
+  DeleteBooking
 } from './booking';

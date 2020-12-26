@@ -13,3 +13,17 @@ export const fetchBookingSuccess = (bookings) => {
     bookings
   }
 }
+
+export const DeleteBooking = (event) => {
+  return{
+    type: actionTypes.BOOKING_DELETE,
+    bookEventId:event
+  }
+}
+
+export const DeleteBookingSuccess = (event) => {
+  return {
+    type: actionTypes.BOOKING_DELETE_SUCCESS,
+    event: event
+  }
+}
