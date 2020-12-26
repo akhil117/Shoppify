@@ -51,9 +51,9 @@ class Event extends React.Component {
 
   clearRefs = () => {
     this.titleRef.current.value = "";
-    this.priceRef.current.value= "";
-    this.descriptionRef.current.value= "";
-    this.dateTimeRef.current.value="";
+    this.priceRef.current.value = "";
+    this.descriptionRef.current.value = "";
+    this.dateTimeRef.current.value = "";
   }
 
   backdropToggle = () => {
@@ -66,18 +66,26 @@ class Event extends React.Component {
   }
 
   componentDidMount = () => {
+    console.log("Component Did mount is calling......");
     this.props.toggleSpinner()
     this.props.fetchEvents();
   }
 
+  componentWillUnmount = () => {
+    console.log("Component will unmount is calling.....");
+  }
+
   render() {
     const { isEvent } = this.state;
-    const { isEventAlert, closeEventAlert, isSpinnerDisplay, events } = this.props
+    const { isEventAlert, closeEventAlert, isSpinnerDisplay, events, token } = this.props
     return (
       <React.Fragment>
-        <div className='events-controls'>
-          <SubmitButton backgroundColor="#0A66C2" width='10%' padding='4px' submitHandler={this.isEventHandler} Title="Create Event" font='12px' />
-        </div>
+        {
+          token &&
+          <div className='events-controls'>
+            <SubmitButton backgroundColor="#0A66C2" width='10%' padding='4px' submitHandler={this.isEventHandler} Title="Create Event" font='12px' />
+          </div>
+        }
         <Modal
           submitHandler={this.isEventHandler}
           backdropToggle={isEvent}
@@ -87,7 +95,7 @@ class Event extends React.Component {
           saveEvent={this.saveEvent}
           descriptionRef={this.descriptionRef}
         />
-        <Items events = {events} />
+        <Items events={events} />
         { isSpinnerDisplay &&
           <div className="spinner_display">
             <Spinner />

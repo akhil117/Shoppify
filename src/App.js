@@ -12,9 +12,11 @@ const App = () => {
   const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
   console.log("MY GLOBAL STATE", auth.token);
+
   useEffect(() => {
     dispatch(actions.authCheckState())
   }, [])
+  
   return (
     <div className="App">
       <BrowserRouter>

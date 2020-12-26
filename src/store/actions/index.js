@@ -11,6 +11,7 @@ export {
   event,
   eventsSuccess,
   fetchEvents,
+  bookEvent,
   closeEventAlert,
   isShowSpinner
 } from './event';

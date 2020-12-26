@@ -32,14 +32,14 @@ class Login extends React.Component {
     const buttonTitle = isLogin ? "Sign Up" : "Login";
     return (
       <form className="login-form">
-        <Text Title="Fashion World" />
-        <DimText Title="Don't miss your Shopping opportunity. Stay Connected to know more about fashion." />
+        <Text Title="Easy-Event" />
+        <DimText Title="Don't miss to know events opportunity. Stay Connected to know more about events." />
         <div className="input-field">
           <Input reference={this.email} hintText="Enter Email" isPassword="text" />
           <Input reference={this.password} hintText="Enter Password" isPassword="password" />
         </div>
         <SubmitButton backgroundColor="#0A66C2" font="14px" width='35%' padding='8px' submitHandler={this.submitHandler} Title={buttonTitle} />
-        <LinkText toggleLogin={this.props.toggleLogin}>{isLogin ? "Already on Shoppify?" : "New to Shoppify?"}</LinkText>
+        <LinkText toggleLogin={this.props.toggleLogin}>{isLogin ? "Already on EasyEvent?" : "New to EasyEvent?"}</LinkText>
       </form>
     );
   }

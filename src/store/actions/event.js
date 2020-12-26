@@ -36,6 +36,13 @@ export const eventsSuccess = (events) => {
   }
 };
 
+export const bookEvent = (eventId) => {
+  return{
+    type: actionTypes.BOOK_EVENT_INITIATE,
+    eventId,
+  }
+};
+
 export const closeEventAlert = () => {
   return {
     type: actionTypes.CLOSE_ALERT_EVENT

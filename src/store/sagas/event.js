@@ -45,6 +45,7 @@ export function* fetchEvent(action) {
   let requestBody = {
     query: `query {
       events {
+        _id
         title
         description
         price
@@ -72,6 +73,32 @@ export function* fetchEvent(action) {
   } catch (err) {
     console.log("Error", err);
   }
+}
 
+export function* bookEvent(action) {
+  const { token } = yield select(state => state.auth)
 
+  let requestBody = {
+    query: `mutation{
+      createBooking(eventId:"${action.eventId}"){
+        _id
+        createdAt
+        updatedAt
+      }
+    }`
+  }
+  try {
+    const res = yield axios.post('http://localhost:3200/graphql', {
+      ...requestBody
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    console.log("BookEventResult", res);
+  } catch (err) {
+    console.log("Error", err);
+  }
 }
