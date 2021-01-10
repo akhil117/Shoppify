@@ -36,7 +36,6 @@ class Event extends React.Component {
     const descriptionRef = this.descriptionRef.current.value;
     const dateTimeRef = new Date(this.dateTimeRef.current.value).toISOString();
 
-    //closing the dialog box
     this.setState(prevState => {
       return {
         ...prevState,
@@ -44,7 +43,7 @@ class Event extends React.Component {
       }
     });
 
-    this.props.createEvent(titleRef, priceRef, dateTimeRef, descriptionRef);
+    this.props.createEvent(titleRef, priceRef, dateTimeRef, descriptionRef,this.props.userId);
 
     this.clearRefs()
   }
@@ -70,6 +69,7 @@ class Event extends React.Component {
     this.props.toggleSpinner()
     this.props.fetchEvents();
   }
+
 
   componentWillUnmount = () => {
     console.log("Component will unmount is calling.....");
@@ -116,13 +116,14 @@ const mapStateToProps = (state) => {
     token: state.auth.token,
     isEventAlert: state.event.isShowAlert,
     isSpinnerDisplay: state.event.isShowSpinner,
-    events: state.event.events
+    events: state.event.events,
+    userId: state.auth.userId
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createEvent: (title, price, datetime, descripiton) => dispatch(action.event(title, price, datetime, descripiton)),
+    createEvent: (title, price, datetime, descripiton,userId) => dispatch(action.event(title, price, datetime, descripiton,userId)),
     fetchEvents: () => dispatch(action.fetchEvents()),
     closeEventAlert: () => dispatch(action.closeEventAlert()),
     toggleSpinner: () => dispatch(action.isShowSpinner())

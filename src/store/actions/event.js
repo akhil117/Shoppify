@@ -1,13 +1,14 @@
 import datetime from '../../components/Input/datetime';
 import * as actionTypes from './actionTypes';
 
-export const event = (title,price,datetime,description)=> {
+export const event = (title,price,datetime,description,userId)=> {
   return {
     type: actionTypes.EVENT_INITIATE,
     title,
     price,
     datetime,
-    description
+    description,
+    userId
   }
 }
 
@@ -47,10 +48,10 @@ export const closeEventAlert = () => {
   return {
     type: actionTypes.CLOSE_ALERT_EVENT
   }
-}
+};
 
 export const isShowSpinner = () => {
   return{
     type: actionTypes.SPINNER_TOGGLE
   }
-}
+};

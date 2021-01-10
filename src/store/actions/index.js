@@ -1,5 +1,6 @@
 export {
   auth,
+  oAuth,
   authSuccess,
   authCheckState,
   logout,

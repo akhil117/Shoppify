@@ -11,13 +11,25 @@ export const auth = (email, password, isLogin) => {
   }
 };
 
+export const oAuth = (email,isLogin,token,expiresOn,userAgentApplication) => {
+  return {
+    type: actionTypes.OAUTH_USER,
+    email,
+    isLogin,
+    token,
+    expiresOn,
+    userAgentApplication
+  }
+}
 
-export const authSuccess = (token, userId,tokenExpiration) => {
+
+export const authSuccess = (token, userId,tokenExpiration,userAgentApplication) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     token,
     userId,
-    tokenExpiration
+    tokenExpiration,
+    userAgentApplication
   }
 }
 

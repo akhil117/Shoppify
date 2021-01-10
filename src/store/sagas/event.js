@@ -51,7 +51,6 @@ export function* fetchEvent(action) {
         price
         date
         creator {
-          email
           _id
         }
       }
