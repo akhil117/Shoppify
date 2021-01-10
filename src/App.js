@@ -16,7 +16,7 @@ const App = () => {
   useEffect(() => {
     dispatch(actions.authCheckState())
   }, [])
-  
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -33,6 +33,7 @@ const App = () => {
               <Route path="/events" component={Event} />
               {auth.token && <Route path="/bookings" component={Booking} />}
               {!auth.token && <Redirect from="/" to="/auth" exact />}
+              {!auth.tokenn && <Redirect to="/auth" />}
             </Switch>
 
           </main>

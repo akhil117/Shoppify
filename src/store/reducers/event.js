@@ -18,7 +18,10 @@ const reducer = (state = initialState, action) => {
       title: action.title,
       date: action.datetime,
       price:  action.price,
-      description: action.description
+      description: action.description,
+      creator: {
+        _id: action.userId
+      }
     }
     let events = state.events;
     events.push(eventObject);

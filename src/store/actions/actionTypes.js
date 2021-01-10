@@ -1,6 +1,7 @@
 // auth action types
 export const IS_LOGIN = 'IS_LOGIN';
 export const AUTH_USER = 'AUTH_USER';
+export const OAUTH_USER = 'OAUTH_USER';
 export const AUTH_SUCCESS ='AUTH_SUCCESS';
 export const AUTH_CHECK_STATE = 'AUTH_CHECK_STATE';
 export const AUTH_INITIATE_LOGOUT = 'AUTH_INITIATE_LOGOUT';
